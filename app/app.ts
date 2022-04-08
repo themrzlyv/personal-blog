@@ -18,13 +18,7 @@ const startServer = async (): Promise<void> => {
   app.set('trust proxy', 1);
 
   // middlewares
-  app.use(
-    cors({
-      // credentials: true,
-      // exposedHeaders: ['set-cookie'],
-      // origin: ['http://localhost:3000', 'https://authline.herokuapp.com'],
-    }),
-  );
+  app.use(cors());
   app.use(cookieParser());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
