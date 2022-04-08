@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node -r tsconfig-paths/register -r ts-node ./dist/app.js",
     "dev": "nodemon",
-    "build": "npm i -g typescript && tsc --project tsconfig.json && cd client && npm i && npm run build && tscpaths -p tsconfig.json -s ./app -o ./dist"
+    "client": "npm i -g typescript && tsc && cd client && npm i && npm run dev",
+    "server": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./app -o ./dist",
+    "build": "npm run client && npm run server"
   },
   "keywords": [
     "Express",
