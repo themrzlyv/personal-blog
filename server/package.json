@@ -1,0 +1,51 @@
+{
+  "name": "server-app",
+  "version": "1.0.0",
+  "description": "personal blog server",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node -r tsconfig-paths/register -r ts-node ./dist/app.js",
+    "dev": "nodemon",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./app -o ./dist"
+  },
+  "keywords": [
+    "Express",
+    "Typescript",
+    "Mongo",
+    "Db"
+  ],
+  "author": "themrzlyv",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.14",
+    "morgan": "^1.10.0",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "tscpaths": "^0.0.9"
+  }
+}
