@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Footer';
 import NavBar from '../NavBar';
 
 const Layout: React.FC = ({ children }) => {
@@ -8,13 +9,7 @@ const Layout: React.FC = ({ children }) => {
       <div className="row-span-3 mt-16">
         <div className="max-w-4xl mx-auto h-full">{children}</div>
       </div>
-      <div className="w-full">
-        <div className="mx-auto max-w-sm flex justify-around">
-          <h4 className="dark:text-white">2022 themrzlyv.herokuapp.com</h4>
-          <h4 className="dark:text-white">Policy</h4>
-          <h4 className="dark:text-white">Terms</h4>
-        </div>
-      </div>
+      <Footer />
     </main>
   );
 };
