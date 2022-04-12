@@ -18,7 +18,12 @@ const startServer = async (): Promise<void> => {
   app.set('trust proxy', 1);
 
   // middlewares
-  app.use(cors());
+  app.use(
+    cors({
+      credentials: true,
+      origin: ['http://localhost:3000', 'https://themrzlyv.herokuapp.com'],
+    }),
+  );
   app.use(cookieParser());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));

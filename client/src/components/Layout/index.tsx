@@ -4,7 +4,7 @@ import NavBar from '../NavBar';
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <main className="grid grid-rows-3 min-w-screen min-h-screen dark:bg-gray-900 transition duration-300">
+    <main className="grid grid-rows-3 min-w-screen min-h-screen dark:bg-stone-900 transition duration-300">
       <NavBar />
       <div className="row-span-3 mt-16">
         <div className="max-w-4xl mx-auto h-full">{children}</div>

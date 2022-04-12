@@ -6,7 +6,7 @@ import Blog from './ui/Blog';
 import Home from './ui/Home';
 import Projects from './ui/Projects';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
