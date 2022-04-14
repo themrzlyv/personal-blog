@@ -1,4 +1,21 @@
-import { QueryClient } from 'react-query';
+import { QueryClient, QueryCache } from 'react-query';
 
-const queryClient = new QueryClient();
+const queryCache = new QueryCache({
+  onError: (error) => {
+    // console.log(error);
+  },
+  onSuccess: (data) => {
+    // console.log(data);
+  }
+});
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+  queryCache
+});
+
 export default queryClient;

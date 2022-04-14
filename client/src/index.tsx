@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import './Themes/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +14,7 @@ rootContainer.render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider initialTheme="light">
       <App />
+      <ReactQueryDevtools initialIsOpen={process.env.NODE_ENV === 'development'} />
     </ThemeProvider>
   </QueryClientProvider>,
 );

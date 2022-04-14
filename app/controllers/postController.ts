@@ -8,10 +8,11 @@ export default class PostController {
   public static async getAllPosts(req: Request, res: Response, next: NextFunction) {
     try {
       // Querys for pagination
-      const { page, limit } = req.query;
+      const { page, limit, search } = req.query;
       const { take, skip } = pagination(page as string, limit as string);
 
       const posts = await Post.aggregate([
+        { $match: { title: { $regex: search ?? '', $options: 'i' } } },
         // take tags with tagIds
         {
           $lookup: {
