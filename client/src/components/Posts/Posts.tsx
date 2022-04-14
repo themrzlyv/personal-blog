@@ -14,6 +14,10 @@ const Posts: React.FC<iPostsProps> = ({ posts, isLoading, error }) => {
     return <div>Loading...</div>;
   }
 
+  if (error) {
+    return <div>Error!</div>;
+  }
+
   return (
     <div>
       {posts?.map((post) => (

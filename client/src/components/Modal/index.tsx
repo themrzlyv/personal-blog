@@ -70,7 +70,7 @@ const Modal: React.FC<iProps> = (props) => {
           style={{ ...backDropStyles }}
         >
           <motion.div
-            className="w-2/4 fixed top-40 left-0 right-0 mx-auto bg-white border-none rounded-xl p-3"
+            className="w-2/4 h-3/4 overflow-scroll fixed top-40 left-0 right-0 mx-auto bg-white dark:bg-zinc-900 dark:border dark:border-cyan-500 shadow-2xl   rounded-xl p-3"
             ref={modalRef}
             style={{ ...modalStyles }}
             variants={modal}
@@ -78,9 +78,9 @@ const Modal: React.FC<iProps> = (props) => {
             animate="current"
             exit="exit"
           >
-            <div className="relative w-full h-full flex justify-end items-center mb-3">
+            <div className="relative w-full  flex justify-end items-center mb-3">
               {innerClose && (
-                <button className="text-black p-2 hover:bg-gray-100 rounded-full" onClick={onClose}>
+                <button className="text-black p-2 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition-all duration-300 rounded-full" onClick={onClose}>
                   <span>
                     <svg
                       className="w-6 h-6"
