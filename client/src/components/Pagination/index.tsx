@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateKey } from '../../infrastructure/common/functions';
 import usePagination, { DOTS } from '../../infrastructure/hooks/usePagination';
 
 interface iPaginationProps {
@@ -59,14 +60,18 @@ const Pagination: React.FC<iPaginationProps> = (props) => {
         </span>
       </button>
 
-      {paginationRange?.map((pageNumber) => {
+      {paginationRange?.map((pageNumber,i) => {
         if (pageNumber === DOTS) {
-          return <span className="p-1">&#8230;</span>;
+          return (
+            <span className="p-1" key={generateKey(pageNumber) + i}>
+              &#8230;
+            </span>
+          );
         }
 
         return (
           <button
-            key={pageNumber}
+            key={generateKey(pageNumber)}
             className={`${
               pageNumber === currentPage ? 'bg-gray-100' : ''
             } px-4 py-2 rounded-full hover:bg-gray-100`}
