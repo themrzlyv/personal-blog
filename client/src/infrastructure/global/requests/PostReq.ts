@@ -14,7 +14,7 @@ export default class PostReq {
   }): Promise<iResponseAllPosts> {
     try {
       const response = await API.get(
-        `/posts${limit ? `?limit=${limit}` : ''}${page ? `&page=${page}` : ''}${
+        `api/posts${limit ? `?limit=${limit}` : ''}${page ? `&page=${page}` : ''}${
           search ? limit ? `&search=${search}` : `?search=${search}` : ''
         }`,
       );
