@@ -33,14 +33,6 @@ const startServer = async (): Promise<void> => {
     console.log('Morgan logger is activated');
   }
 
-  // Production Deploy
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-    });
-  }
-
   app.all('*', (req, res, next) => {
     res.header(
       'Access-Control-Allow-Origin',
@@ -57,6 +49,14 @@ const startServer = async (): Promise<void> => {
 
   // global error handler
   app.use(errorHandler);
+
+  // Production Deploy
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    });
+  }
 
   const port: number = Number(process.env.PORT) || 4000;
 
