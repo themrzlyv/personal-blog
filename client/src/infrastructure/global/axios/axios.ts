@@ -8,7 +8,7 @@ const API = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    creditials: 'include',
+    // creditials: 'include',
   },
 });
 
