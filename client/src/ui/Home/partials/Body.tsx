@@ -8,7 +8,7 @@ import PostReq from '../../../infrastructure/global/requests/PostReq';
 
 const Body = () => {
   const { data, isLoading, error } = useQuery(QueryId.GET_ALL_POSTS, () =>
-    PostReq.getAllPosts({ limit: 2 }),
+    PostReq.getAllPosts({ limit: 3 }),
   );
 
   return (

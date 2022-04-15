@@ -1,8 +1,9 @@
 import React from 'react'
+import PreLoader from '../../components/PreLoader'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>about</div>
   )
 }
 

@@ -1,7 +1,7 @@
-import moment from 'moment';
 import React from 'react';
 import { iPost } from '../../infrastructure/common/types';
 import Post from '../Post';
+import PostSkeleton from '../PostSkeleton';
 
 interface iPostsProps {
   posts?: iPost[];
@@ -11,7 +11,13 @@ interface iPostsProps {
 
 const Posts: React.FC<iPostsProps> = ({ posts, isLoading, error }) => {
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        {[...Array(5)].map((_, index) => (
+          <PostSkeleton key={index} />
+        ))}
+      </>
+    );
   }
 
   if (error) {

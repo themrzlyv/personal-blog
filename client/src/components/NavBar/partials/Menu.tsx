@@ -5,12 +5,15 @@ import SwitchTheme from '../../SwitchTheme';
 import NavTabs from '../../Tab';
 
 const Menu = () => {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, initialState } = useContext(AppContext);
+  const {
+    appTools: { isSearchBoxVisible },
+  } = initialState;
   return (
     <div className="max-w-2/5 flex items-center justify-around px-2 ">
       <NavTabs links={navMenuLinks} />
       <button
-        className="focus:text-white text-gray-500  p-2 mx-2"
+        className={`${isSearchBoxVisible ? 'text-white' : 'text-gray-500'} p-2 mx-2`}
         onClick={() => dispatch({ type: 'toggleSearchBox' })}
       >
         <span>
