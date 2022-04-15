@@ -31,6 +31,7 @@ export default class PostController {
       ]);
       const count = await Post.countDocuments();
       const pages = limit ? Math.ceil(count / take) : 1;
+      console.log({ totalPosts: count, pages, posts });
       res.status(200).json({ totalPosts: count, pages, posts });
     } catch (error) {
       next(error);

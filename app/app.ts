@@ -41,16 +41,16 @@ const startServer = async (): Promise<void> => {
     });
   }
 
-  // app.all('*', (req, res, next) => {
-  //   res.header(
-  //     'Access-Control-Allow-Origin',
-  //     process.env.NODE_ENV === 'development'
-  //       ? 'http://localhost:3000'
-  //       : 'https://authline.herokuapp.com',
-  //   );
-  //   res.header('Access-Control-Allow-Credentials', 'true');
-  //   next();
-  // });
+  app.all('*', (req, res, next) => {
+    res.header(
+      'Access-Control-Allow-Origin',
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : 'https://themrzlyv.herokuapp.com',
+    );
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
 
   // routes
   app.use('/api', mainRoutes);
