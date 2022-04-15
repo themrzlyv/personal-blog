@@ -5,7 +5,7 @@ const API = axios.create({
   //   process.env.NODE_ENV === 'development'
   //     ? 'http://localhost:4000/api'
   //     : 'https://themrzlyv.herokuapp.com/api',
-  withCredentials: true,
+  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     // creditials: 'include',
