@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "personal blog server",
   "main": "dist/app.js",
-  "homepage": "./dist",
   "scripts": {
     "start": "node -r tsconfig-paths/register -r ts-node ./dist/app.js",
     "server:dev": "nodemon",
