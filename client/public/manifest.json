@@ -2,7 +2,7 @@
   "short_name": "Themrzlyv personal blog",
   "name": "Themrzlyv personal blog",
   "icons": [],
-  "start_url": ".",
+  "start_url": "/client/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
