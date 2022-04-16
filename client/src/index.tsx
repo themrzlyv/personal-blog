@@ -15,7 +15,7 @@ const rootContainer = ReactDOM.createRoot(container);
 rootContainer.render(
   <AppProvider>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider initialTheme="light">
+      <ThemeProvider>
         <App />
         <SearchBox />
         <ReactQueryDevtools initialIsOpen={process.env.NODE_ENV === 'development'} />

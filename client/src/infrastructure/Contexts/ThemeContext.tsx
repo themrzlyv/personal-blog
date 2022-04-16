@@ -7,7 +7,7 @@ interface iThemeContext {
 
 interface iThemeContextProvider {
   children: React.ReactNode;
-  initialTheme: string;
+  initialTheme?: string;
 }
 
 const getInitialTheme = (): string => {

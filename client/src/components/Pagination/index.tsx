@@ -40,7 +40,7 @@ const Pagination: React.FC<iPaginationProps> = (props) => {
       <button
         onClick={onPrevious}
         disabled={currentPage === 1}
-        className="hover:bg-gray-100 transition-all duration-300 rounded-full p-2 disabled:bg-transparent disabled:text-gray-400"
+        className="hover:bg-gray-100 dark:bg-gray-100 dark:bg-opacity-20 dark:hover:text-white dark:disabled:text-gray-400 transition-all duration-300 rounded-full p-2 disabled:bg-transparent disabled:text-gray-400"
       >
         <span>
           <svg
@@ -60,7 +60,7 @@ const Pagination: React.FC<iPaginationProps> = (props) => {
         </span>
       </button>
 
-      {paginationRange?.map((pageNumber,i) => {
+      {paginationRange?.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
           return (
             <span className="p-1" key={generateKey(pageNumber) + i}>
@@ -73,8 +73,8 @@ const Pagination: React.FC<iPaginationProps> = (props) => {
           <button
             key={generateKey(pageNumber)}
             className={`${
-              pageNumber === currentPage ? 'bg-gray-100' : ''
-            } px-4 py-2 rounded-full hover:bg-gray-100`}
+              pageNumber === currentPage ? 'bg-gray-100 dark:text-black' : ''
+            } px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:text-black dark:text-white transition-all duration-300`}
             onClick={() => onPageChange(pageNumber as number)}
           >
             {pageNumber}
@@ -85,7 +85,7 @@ const Pagination: React.FC<iPaginationProps> = (props) => {
       <button
         disabled={currentPage === lastPage}
         onClick={onNext}
-        className="hover:bg-gray-100 transition-all duration-300 rounded-full p-2 disabled:bg-transparent disabled:text-gray-400"
+        className="hover:bg-gray-100 dark:bg-gray-100 dark:bg-opacity-20 dark:hover:text-white dark:disabled:text-gray-400 transition-all duration-300 rounded-full p-2 disabled:bg-transparent disabled:text-gray-400"
       >
         <span>
           <svg
