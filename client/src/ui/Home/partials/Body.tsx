@@ -13,7 +13,7 @@ const Body = () => {
 
   return (
     <div className="p-3">
-      <h4 className="text-gray-400 text-xl">Last blog posts</h4>
+      <h4 className="text-gray-400 text-lg font-light">Last blog posts</h4>
       <Posts posts={data?.posts} isLoading={isLoading} error={error} />
       <div className="flex justify-center">
         <NavLink

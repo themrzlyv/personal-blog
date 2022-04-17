@@ -9,7 +9,7 @@ const MainLogo = () => {
       <div className="w-12 h-12 overflow-hidden flex justify-center rounded-full ">
         <img src={Man} className="object-contain" alt="profile" />
       </div>
-      <MenuLink to="/" className='text-white'>
+      <MenuLink to="/" className="text-white font-semibold tracking-widest">
         THEMRZLYV
       </MenuLink>
     </div>

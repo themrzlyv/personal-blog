@@ -37,8 +37,8 @@ const NavTabs: React.FC<iTabsProps> = ({ links }) => {
           handleActiveTab(link);
         }}
         className={({ isActive }) =>
-          `transition-all duration-150 h-9 w-24 flex items-center justify-center ${
-            isActive ? 'text-white' : 'text-gray-400'
+          `transition-all duration-150 h-9 w-24 flex items-center justify-center hover:text-white tracking-wide ${
+            isActive ? 'text-white' : 'text-gray-500'
           } `
         }
       >

@@ -1,5 +1,4 @@
 import React from 'react'
-import PreLoader from '../../components/PreLoader'
 import Body from './partials/Body'
 import Header from './partials/Header'
 

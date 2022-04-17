@@ -2,11 +2,11 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="w-full">
+    <div className="w-full py-3 border-t ">
       <div className="mx-auto max-w-sm flex justify-around">
-        <h4 className="dark:text-white">2022 themrzlyv.herokuapp.com</h4>
-        <h4 className="dark:text-white">Policy</h4>
-        <h4 className="dark:text-white">Terms</h4>
+        <p className="font-extralight text-xs dark:text-white">
+          &#169; 2022 themrzlyv.herokuapp.com
+        </p>
       </div>
     </div>
   );

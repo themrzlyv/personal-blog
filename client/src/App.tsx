@@ -1,18 +1,22 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PreLoader from './components/PreLoader';
+import Layout from './components/Layout';
+import About from './ui/About';
+import Blog from './ui/Blog';
 import Home from './ui/Home';
+import Projects from './ui/Projects';
 
-const Layout = React.lazy(() => import('./components/Layout'));
-const About = React.lazy(() => import('./ui/About'));
-const Blog = React.lazy(() => import('./ui/Blog'));
-const Projects = React.lazy(() => import('./ui/Projects'));
+// import PreLoader from './components/PreLoader';
+// const Layout = React.lazy(() => import('./components/Layout'));
+// const About = React.lazy(() => import('./ui/About'));
+// const Blog = React.lazy(() => import('./ui/Blog'));
+// const Projects = React.lazy(() => import('./ui/Projects'));
 
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PreLoader />}>
+      {/* <Suspense fallback={<PreLoader />}> */}
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -21,7 +25,7 @@ const App: React.FC = () => {
             <Route path="/projects" element={<Projects />} />
           </Routes>
         </Layout>
-      </Suspense>
+      {/* </Suspense> */}
     </BrowserRouter>
   );
 };
