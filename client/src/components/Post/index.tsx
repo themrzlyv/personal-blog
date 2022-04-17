@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { iPost } from '../../infrastructure/common/types';
 
 interface iProps {
@@ -7,7 +8,8 @@ interface iProps {
 }
 const Post: React.FC<iProps> = ({ post }) => {
   return (
-    <div
+    <NavLink
+      to={`/post/${post.title}-${post._id}`}
       key={post._id}
       className="w-full my-5 p-5 flex flex-col shadow-md border relative rounded-sm  dark:border-gray-700 before:absolute before:w-full before:h-full before:left-0 before:top-0 before:scale-y-0 hover:before:scale-y-100 before:transition-all before:duration-500 before:border-cyan-600 before:border-l  before:border-r after:absolute after:w-full after:h-full after:left-0 after:top-0 after:scale-x-0 hover:after:scale-x-100 after:transition-all after:duration-500 after:border-cyan-600 after:border-t after:border-b"
     >
@@ -46,7 +48,7 @@ const Post: React.FC<iProps> = ({ post }) => {
           </p>
         ))}
       </div>
-    </div>
+    </NavLink>
   );
 };
 

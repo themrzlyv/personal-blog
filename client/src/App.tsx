@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import About from './ui/About';
 import Blog from './ui/Blog';
 import Home from './ui/Home';
+import PostDetail from './ui/PostDetail';
 import Projects from './ui/Projects';
 
 // import PreLoader from './components/PreLoader';
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/post/:title" element={<PostDetail />} />
           </Routes>
         </Layout>
       {/* </Suspense> */}

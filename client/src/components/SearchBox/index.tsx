@@ -20,8 +20,6 @@ const SearchBox = () => {
     }
   }, [searchRef, mutate]);
 
-  console.log(data);
-
   return (
     <Modal
       show={isSearchBoxVisible}

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { iResponseAllPosts } from '../../common/types';
+import { iResponseAllPosts, iResponseSinglePost } from '../../common/types';
 import API from '../axios/axios';
 
 export default class PostReq {
@@ -15,9 +15,18 @@ export default class PostReq {
     try {
       const response = await API.get(
         `/posts${limit ? `?limit=${limit}` : ''}${page ? `&page=${page}` : ''}${
-          search ? limit ? `&search=${search}` : `?search=${search}` : ''
+          search ? (limit ? `&search=${search}` : `?search=${search}`) : ''
         }`,
       );
+      return response.data;
+    } catch (error) {
+      throw new Error((error as AxiosError)?.response?.data?.error);
+    }
+  }
+
+  public static async getPostById(id: string): Promise<iResponseSinglePost> {
+    try {
+      const response = await API.get(`/posts/${id}`);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError)?.response?.data?.error);

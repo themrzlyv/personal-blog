@@ -12,13 +12,18 @@ export interface iResponseAllPosts {
   posts: iPost[];
 }
 
+export interface iResponseSinglePost {
+  post: iPost;
+}
+
 export interface iPost {
   _id: string;
   title: string;
   content: string;
   tags: iTag[];
-  image: string[];
+  images: string[];
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface iTag {
