@@ -9,6 +9,7 @@ import { ThemeProvider } from './infrastructure/Contexts/ThemeContext';
 import queryClient from './infrastructure/global/rQueryConfig/rQueryContig';
 import AppProvider from './infrastructure/Contexts/AppContext/AppContext';
 import SearchBox from './components/SearchBox';
+import NotifyForTest from './components/NotifyForTest';
 
 const container = document.getElementById('root') as HTMLElement;
 const rootContainer = ReactDOM.createRoot(container);
@@ -18,6 +19,7 @@ rootContainer.render(
       <ThemeProvider>
         <App />
         <SearchBox />
+        <NotifyForTest />
         <ReactQueryDevtools initialIsOpen={process.env.NODE_ENV === 'development'} />
       </ThemeProvider>
     </QueryClientProvider>
