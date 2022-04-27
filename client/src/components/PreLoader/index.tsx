@@ -2,7 +2,7 @@ import React from 'react';
 
 const PreLoader = () => {
   return (
-    <div className="absolute w-full h-full flex items-center justify-center">
+    <div className=" w-full h-full flex items-center justify-center">
       <span className="">
         <svg
           className="w-10 h-10 animate-spin text-black"

@@ -1,5 +1,7 @@
 import React from 'react';
 import { iPost } from '../../infrastructure/common/types';
+import EmptyData from '../EmptyData';
+import NetworkError from '../NetworkError';
 import Post from '../Post';
 import PostSkeleton from '../PostSkeleton';
 
@@ -21,7 +23,11 @@ const Posts: React.FC<iPostsProps> = ({ posts, isLoading, error }) => {
   }
 
   if (error) {
-    return <div>Error!</div>;
+    return <NetworkError error={error} />;
+  }
+
+  if (!posts || posts.length === 0) {
+    return <EmptyData />;
   }
 
   return (

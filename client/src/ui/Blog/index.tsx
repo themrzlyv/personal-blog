@@ -24,12 +24,14 @@ const Blog = () => {
       <div className="p-3">
         <Posts posts={data?.posts} isLoading={isLoading} error={error} />
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalCount={data?.totalPosts as number}
-        pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {!data || data.posts.length === 0 || error || isLoading ? null : (
+        <Pagination
+          currentPage={currentPage}
+          totalCount={data?.totalPosts as number}
+          pageSize={PageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 };

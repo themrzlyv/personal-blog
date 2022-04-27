@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import About from './ui/About';
 import Blog from './ui/Blog';
 import Home from './ui/Home';
+import NotFound from './ui/NotFound';
 import PostDetail from './ui/PostDetail';
 import Projects from './ui/Projects';
 
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/post/:title" element={<PostDetail />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       // {/* </Suspense> */}

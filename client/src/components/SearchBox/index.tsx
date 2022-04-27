@@ -69,13 +69,15 @@ const SearchBox = () => {
           </span>
         </button>
       </div>
-        {data && !error && !isLoading && (
-          <div className='flex items-center dark:text-white'>
-            <p className='font-light mr-2'>Result for:</p>
-            <p className='font-semibold '>{data.search}</p>
-          </div>
-        )}
-      <Posts posts={data?.posts} isLoading={isLoading} error={error} />
+      {data && !error && !isLoading && (
+        <div className="flex items-center dark:text-white">
+          <p className="font-light mr-2">Result for:</p>
+          <p className="font-semibold ">{data.search}</p>
+        </div>
+      )}
+      {data && !error && !isLoading && (
+        <Posts posts={data.posts} isLoading={isLoading} error={error} />
+      )}
     </Modal>
   );
 };
