@@ -9,6 +9,7 @@ interface iProps {
   modalStyles?: React.CSSProperties;
   children: React.ReactNode;
   innerClose?: boolean;
+  modalContainerClassName?: string;
 }
 
 const backDrop = {
@@ -33,7 +34,7 @@ const modal = {
 };
 
 const Modal: React.FC<iProps> = (props) => {
-  const { show, onClose, backDropStyles, modalStyles, children, innerClose } = props;
+  const { show, onClose, backDropStyles, modalStyles, children, innerClose, modalContainerClassName } = props;
 
   const modalRef = React.useRef<HTMLDivElement>(null);
 
@@ -80,7 +81,10 @@ const Modal: React.FC<iProps> = (props) => {
           >
             <div className="relative w-full  flex justify-end items-center mb-3">
               {innerClose && (
-                <button className="text-black p-2 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition-all duration-300 rounded-full" onClick={onClose}>
+                <button
+                  className="text-black p-2 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition-all duration-300 rounded-full"
+                  onClick={onClose}
+                >
                   <span>
                     <svg
                       className="w-6 h-6"
@@ -100,7 +104,7 @@ const Modal: React.FC<iProps> = (props) => {
                 </button>
               )}
             </div>
-            <div className="relative w-full h-full">{children}</div>
+            <div className={`relative w-full h-full ${modalContainerClassName}`}>{children}</div>
           </motion.div>
         </motion.div>
       )}

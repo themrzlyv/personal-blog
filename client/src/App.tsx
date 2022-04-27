@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import About from './ui/About';
 import Blog from './ui/Blog';
@@ -16,8 +16,7 @@ import Projects from './ui/Projects';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      {/* <Suspense fallback={<PreLoader />}> */}
+      // {/* <Suspense fallback={<PreLoader />}> */}
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -27,8 +26,7 @@ const App: React.FC = () => {
             <Route path="/post/:title" element={<PostDetail />} />
           </Routes>
         </Layout>
-      {/* </Suspense> */}
-    </BrowserRouter>
+      // {/* </Suspense> */}
   );
 };
 

@@ -1,16 +1,29 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { iPost } from '../../infrastructure/common/types';
+import { AppContext } from '../../infrastructure/Contexts/AppContext/AppContext';
 
 interface iProps {
   post: iPost;
 }
 const Post: React.FC<iProps> = ({ post }) => {
+  const {
+    dispatch,
+    initialState: { appTools },
+  } = useContext(AppContext);
+
+  const handleClick = () => {
+    if (appTools.isSearchBoxVisible) {
+      dispatch({ type: 'toggleSearchBox' });
+    }
+  };
+
   return (
     <NavLink
-      to={`/post/${post.title}-${post._id}`}
-      key={post._id}
+      to={`/post/${post.title}-${post.id}`}
+      key={post.id}
+      onClick={handleClick}
       className="w-full my-5 p-5 flex flex-col shadow-md border relative rounded-sm  dark:border-gray-700 before:absolute before:w-full before:h-full before:left-0 before:top-0 before:scale-y-0 hover:before:scale-y-100 before:transition-all before:duration-500 before:border-cyan-600 before:border-l  before:border-r after:absolute after:w-full after:h-full after:left-0 after:top-0 after:scale-x-0 hover:after:scale-x-100 after:transition-all after:duration-500 after:border-cyan-600 after:border-t after:border-b"
     >
       <div className="mb-3 flex items-center">
@@ -23,7 +36,9 @@ const Post: React.FC<iProps> = ({ post }) => {
 
       <div className="flex flex-col mb-5">
         <h4 className="dark:text-white text-xl font-semibold mb-3">{post.title}</h4>
-        <p className="text-gray-500 text-lg font-light">{post.content}</p>
+        <p className="text-gray-500 text-lg font-light">
+          {post.content.slice(0, 140)} <span className="tracking-wider">...</span>
+        </p>
       </div>
       <div className="flex items-center">
         <span className="mr-2">
@@ -42,9 +57,10 @@ const Post: React.FC<iProps> = ({ post }) => {
             ></path>
           </svg>
         </span>
-        {post.tags.map((tag) => (
-          <p key={tag._id} className="text-sm dark:text-gray-200 font-extralight">
+        {post.tags.map(({ tag }, idx) => (
+          <p key={tag.id} className={`text-sm dark:text-gray-200 font-extralight`}>
             {tag.tagName}
+            {idx !== post.tags.length - 1 && <span className="mx-2">|</span>}
           </p>
         ))}
       </div>

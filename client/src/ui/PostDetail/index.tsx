@@ -24,12 +24,12 @@ const PostDetail = () => {
   if(!data) return <div>no data</div>
 
   return (
-    <div className="h-screen">
+    <div className="h-screen mb-20">
       <div
         style={{ backgroundImage: `url(${data.post.images[0]})` }}
         className="w-full h-[30rem] bg-no-repeat bg-center bg-[length:50rem_30rem] bg-fixed"
       />
-      <div className="w-full bg-gray-100 my-5 p-5 rounded-md">
+      <div className="w-full dark:bg-gray-600 bg-gray-100 my-5 p-5 rounded-md">
         <div className="mb-2 flex items-center">
           <h6 className=" text-gray-400 text-sm font-light">
             {moment(data.post.createdAt).format('D MMM YYYY')}
@@ -37,7 +37,7 @@ const PostDetail = () => {
           <span className="text-gray-400 mx-2">|</span>
           <h6 className="text-gray-400 text-sm font-light">{moment(data.post.createdAt).fromNow()}</h6>
         </div>
-        <h4 className='text-lg font-normal mb-2'>{data.post.title}</h4>
+        <h4 className='text-lg font-normal mb-2 dark:text-white text-black'>{data.post.title}</h4>
         <div className="flex items-center">
           <span className="mr-2">
             <svg
@@ -55,15 +55,16 @@ const PostDetail = () => {
               ></path>
             </svg>
           </span>
-          {data.post.tags.map((tag) => (
-            <NavLink to={`/tag/${tag.tagName}-${tag._id}`} key={tag._id} className="text-sm dark:text-gray-200 font-extralight">
+          {data.post.tags.map(({tag}, idx) => (
+            <NavLink to={`/tag/${tag.tagName}-${tag.id}`} key={tag.id} className="text-sm dark:hover:text-cyan-600  hover:text-cyan-600 dark:text-gray-200 font-extralight">
               {tag.tagName}
+              {idx !== data.post.tags.length - 1 && <span className="mx-2">|</span>}
             </NavLink>
           ))}
         </div>
       </div>
       <div className='my-5'>
-          <p className='font-extralight text-current'>{data.post.content}</p>
+          <p className='font-extralight text-current dark:text-gray-100'>{data.post.content}</p>
       </div>
     </div>
   );

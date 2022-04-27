@@ -3,15 +3,17 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import connectToMongo from './config/connectDb';
 import mainRoutes from './routes/mainRoutes';
 import errorHandler from './middlewares/errorHandler';
 import path from 'path';
+import { prismaConnect } from './config/prismaConfig';
 
 dotenv.config();
 
-// mongoose connection
-connectToMongo();
+// prisma connection
+prismaConnect()
+  .then(() => console.log('Prisma connection is successful'))
+  .catch((error) => console.log(error));
 
 const startServer = async (): Promise<void> => {
   const app: Application = express();

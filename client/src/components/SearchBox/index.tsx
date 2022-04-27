@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { AppContext } from '../../infrastructure/Contexts/AppContext/AppContext';
 import PostReq from '../../infrastructure/global/requests/PostReq';
@@ -6,36 +6,49 @@ import Modal from '../Modal';
 import Posts from '../Posts/Posts';
 
 const SearchBox = () => {
-  const searchRef = React.useRef<HTMLInputElement>(null);
+  const [searchInput, setSearchInput] = React.useState<string>('');
   const { initialState, dispatch } = useContext(AppContext);
   const {
     appTools: { isSearchBoxVisible },
   } = initialState;
 
-  const { mutate, data, isLoading, error } = useMutation('mutationid', PostReq.getAllPosts);
+  const { mutate, data, isLoading, error, reset } = useMutation('mutationid', PostReq.getAllPosts, {
+    onMutate: () => {
+      setSearchInput('');
+    },
+  });
 
   const handleSearch = React.useCallback(() => {
-    if (searchRef.current?.value) {
-      mutate({ search: searchRef.current.value });
+    if (searchInput) {
+      mutate({ search: searchInput });
     }
-  }, [searchRef, mutate]);
+  }, [searchInput, mutate]);
+
+  useEffect(() => {
+    if (!isSearchBoxVisible) {
+      setSearchInput('');
+      reset();
+    }
+  }, [isSearchBoxVisible, reset]);
 
   return (
     <Modal
       show={isSearchBoxVisible}
+      modalContainerClassName="pb-3 px-3"
       onClose={() => dispatch({ type: 'toggleSearchBox' })}
       innerClose
     >
       <div className="flex items-center">
         <input
-          ref={searchRef}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           type="text"
           className="border flex-1 focus:outline-none text-lg h-10 mr-1 indent-1 rounded-tl-md rounded-bl-md my-3"
           placeholder="Search post..."
         />
         <button
           onClick={handleSearch}
-          // disabled={!searchRef.current?.value}
+          disabled={!searchInput || isLoading}
           className="w-16 h-10 flex items-center justify-center dark:text-black dark:bg-white hover:bg-gray-100 disabled:text-gray-300 disabled:bg-transparent transition-all duration-500"
         >
           <span>
@@ -56,6 +69,12 @@ const SearchBox = () => {
           </span>
         </button>
       </div>
+        {data && !error && !isLoading && (
+          <div className='flex items-center dark:text-white'>
+            <p className='font-light mr-2'>Result for:</p>
+            <p className='font-semibold '>{data.search}</p>
+          </div>
+        )}
       <Posts posts={data?.posts} isLoading={isLoading} error={error} />
     </Modal>
   );

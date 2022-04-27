@@ -10,6 +10,7 @@ export interface iResponseAllPosts {
   totalPosts: number;
   pages: number;
   posts: iPost[];
+  search?: string | undefined;
 }
 
 export interface iResponseSinglePost {
@@ -17,7 +18,7 @@ export interface iResponseSinglePost {
 }
 
 export interface iPost {
-  _id: string;
+  id: string;
   title: string;
   content: string;
   tags: iTag[];
@@ -27,8 +28,10 @@ export interface iPost {
 }
 
 export interface iTag {
-  _id: string;
-  tagName: string;
-  posts: iPost[];
-  createdAt: string;
+  tag: {
+    id: string;
+    tagName: string;
+    posts: iPost[];
+    createdAt: string;
+  };
 }

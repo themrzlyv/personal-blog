@@ -1,14 +1,17 @@
-import Post from '@app/models/Post';
-import Tag from '@app/models/Tag';
+import ApiError from '@app/middlewares/ApiError';
 import { pagination } from '@app/services/functions';
-import { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose'
-
+import { NextFunction, Request, Response } from 'express';
+import { prisma } from '../config/prismaConfig';
 export default class TagController {
   public static async getAllTags(req: Request, res: Response, next: NextFunction) {
     try {
-      const tags = await Tag.find({});
-      res.status(200).json(tags);
+      // const tags = await Tag.find({});
+      const tags = await prisma.tag.findMany({
+        orderBy: {
+          tagName: 'asc',
+        },
+      });
+      res.status(200).json({ totalTags: tags.length, tags });
     } catch (error) {
       next(error);
     }
@@ -19,29 +22,36 @@ export default class TagController {
       const { id } = req.params;
       const { page, limit } = req.query;
       const { take, skip } = pagination(page as string, limit as string);
-      const tag = await Tag.aggregate([
-        {
-          $match: {
-            _id: mongoose.Types.ObjectId(id),
+      const tag = await prisma.tag.findUnique({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          posts: {
+            include: {
+              post: true,
+              tag: true,
+            },
+            skip: skip ?? undefined,
+            take: take ?? undefined,
           },
         },
-        {
-          $lookup: {
-            from: 'posts',
-            localField: 'posts',
-            foreignField: '_id',
-            as: 'posts',
+      });
+      const totalPosts = await prisma.tag.findUnique({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          posts: {
+            include: {
+              post: true,
+            },
           },
         },
-        { $sort: { createdAt: -1 } },
-        {
-          $skip: skip,
-        },
-        { $limit: take },
-      ]);
-      const count = await Post.countDocuments({ tags: mongoose.Types.ObjectId(id) });
+      });
+      const count = totalPosts?.posts.length as number;
       const pages = limit ? Math.ceil(count / take) : 1;
-      res.status(200).json({ totalPosts: count, pages, tag: { ...tag[0] } });
+      res.status(200).json({ totalPosts: count, pages, tag });
     } catch (error) {
       next(error);
     }
@@ -50,11 +60,13 @@ export default class TagController {
   public static async createTag(req: Request, res: Response, next: NextFunction) {
     try {
       const { tagName } = req.body;
-      const tag = new Tag({
-        tagName,
-        posts: [],
-      });
-      await tag.save();
+      const existTag = await prisma.tag.findUnique({ where: { tagName } });
+      if (existTag) return next(ApiError.badRequest(400, 'This tag already exists!'));
+      await prisma.tag.create({
+        data: {
+          tagName,
+        }
+      })
       res.status(201).json({ message: 'Tag created successfully' });
     } catch (error) {
       next(error);
@@ -65,7 +77,17 @@ export default class TagController {
     try {
       const { id } = req.params;
       const { tagName } = req.body;
-      await Tag.findByIdAndUpdate(id, { tagName }, { new: true });
+      if (!tagName) return next(ApiError.badRequest(400, 'Please fill all inputs!'));
+      const existNamedBrand = await prisma.tag.findUnique({ where: { id: Number(id) } });
+      if (!existNamedBrand) return next(ApiError.badRequest(400, "Tag couldn't find!"));
+      if (tagName === existNamedBrand?.tagName)
+        return next(ApiError.badRequest(400, 'The name same as older!'));
+      await prisma.tag.update({
+        where: { id: Number(id) },
+        data: {
+          tagName,
+        },
+      });
       res.status(200).json({ message: 'Tag updated successfully' });
     } catch (error) {
       next(error);
@@ -75,11 +97,9 @@ export default class TagController {
   public static async deleteTag(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const tag = await Tag.findById(id);
-      tag.posts.forEach(async (postId: string) => {
-        await Post.findByIdAndUpdate(postId, { $pull: { tags: id } });
-      });
-      await tag.remove();
+       await prisma.tag.delete({
+         where: { id: Number(id) },
+       });
       res.status(200).json({ message: 'Tag deleted successfully' });
     } catch (error) {
       next(error);

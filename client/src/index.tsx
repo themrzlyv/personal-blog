@@ -10,20 +10,23 @@ import queryClient from './infrastructure/global/rQueryConfig/rQueryContig';
 import AppProvider from './infrastructure/Contexts/AppContext/AppContext';
 import SearchBox from './components/SearchBox';
 import NotifyForTest from './components/NotifyForTest';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root') as HTMLElement;
 const rootContainer = ReactDOM.createRoot(container);
 rootContainer.render(
-  <AppProvider>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <App />
-        <SearchBox />
-        <NotifyForTest />
-        <ReactQueryDevtools initialIsOpen={process.env.NODE_ENV === 'development'} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </AppProvider>,
+  <BrowserRouter>
+    <AppProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <App />
+          <SearchBox />
+          <NotifyForTest />
+          <ReactQueryDevtools initialIsOpen={process.env.NODE_ENV === 'development'} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AppProvider>
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function
