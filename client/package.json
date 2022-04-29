@@ -16,6 +16,7 @@
     "moment": "^2.29.2",
     "query-string": "^7.1.1",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-chrono": "^1.14.0",
     "react-dom": "^18.0.0",
     "react-loading-skeleton": "^3.1.0",
     "react-query": "^3.34.19",
