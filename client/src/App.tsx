@@ -1,34 +1,35 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
-import About from './ui/About';
-import Blog from './ui/Blog';
-import Home from './ui/Home';
-import NotFound from './ui/NotFound';
-import PostDetail from './ui/PostDetail';
-import Projects from './ui/Projects';
+import PreLoader from './components/PreLoader';
 
-// import PreLoader from './components/PreLoader';
-// const Layout = React.lazy(() => import('./components/Layout'));
-// const About = React.lazy(() => import('./ui/About'));
-// const Blog = React.lazy(() => import('./ui/Blog'));
-// const Projects = React.lazy(() => import('./ui/Projects'));
-
+const Home = React.lazy(() => import('./ui/Home'));
+const About = React.lazy(() => import('./ui/About'));
+const Blog = React.lazy(() => import('./ui/Blog'));
+const Projects = React.lazy(() => import('./ui/Projects'));
+const NotFound = React.lazy(() => import('./ui/NotFound'));
+const PostDetail = React.lazy(() => import('./ui/PostDetail'));
 
 const App: React.FC = () => {
   return (
-      // {/* <Suspense fallback={<PreLoader />}> */}
+    <Suspense
+      fallback={
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/post/:title" element={<PostDetail />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <PreLoader />
         </Layout>
-      // {/* </Suspense> */}
+      }
+    >
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/post/:title" element={<PostDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
+    </Suspense>
   );
 };
 
