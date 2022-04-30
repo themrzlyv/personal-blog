@@ -38,6 +38,11 @@ const Projects = () => {
 
   return (
     <div className='w-full py-5 my-5 dark:bg-zinc-900 shadow-md'>
+      <div className='mb-3'>
+        <h1 className='text-3xl font-bold text-center text-zinc-500 dark:text-zinc-300'>
+          Personal Projects
+        </h1>
+      </div>
       <Chrono
         items={items}
         hideControls
