@@ -20,6 +20,9 @@
   ],
   "author": "themrzlyv",
   "license": "MIT",
+  "engines": {
+    "node": "16.14.2"
+  },
   "dependencies": {
     "@prisma/client": "^3.12.0",
     "bcrypt": "^5.0.1",
