@@ -22,6 +22,8 @@ const PostDetail = () => {
     },
   );
 
+  console.log(postId, 'postId');
+
   if (isLoading) return <PreLoader />;
   if (error) return <NetworkError error={error} />;
   if (!data) return <EmptyData />;
